@@ -1,0 +1,28 @@
+<div class="col-md-4">
+    <div class="card mb-4 shadow-sm">
+        {% if page.has_image %}
+        <div class="bd-placeholder-img card-img-top"
+            style="background-image: url('/{{ site.subdir }}{{ site.podcast.episodes }}/ep{{ page.slug }}.png')"> </div>
+        {% endif %}
+        <div class="card-body">
+            <small class="card-text text-muted">{{ site.podcast.episode_label }} {{ page.slug }}</small>
+            <h4><a class="invisible-link"
+                    href="/{{ site.subdir }}{{ site.podcast.episodes }}/{{ page.slug }}">{{ page.title }}</a></h4>
+            <p class="card-text">{{ page.summary }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a class="btn btn-sm btn-outline-secondary"
+                        href="/{{ site.subdir }}{{ site.podcast.episodes }}/{{ page.slug }}">Listen</a>
+                    <a class="btn btn-sm btn-outline-secondary"
+                        href="/{{ site.subdir }}{{ site.podcast.episodes }}/{{ page.slug }}">Details</a>
+                    <a class="btn btn-sm btn-outline-secondary"
+                        href="https://dts.podtrac.com/redirect.mp3/{{ site.podcast.domain }}/{{ site.subdir }}{{ site.podcast.episodes }}/ep{{ page.slug }}.mp3">MP3</a>
+                    {% if page.book %}
+                    <a class="btn btn-sm btn-outline-secondary" href="{{ page.book.link }}">Book</a>
+                    {% endif %}
+                </div>
+                <small class="text-muted">{{ page.duration }}</small>
+            </div>
+        </div>
+    </div>
+</div>

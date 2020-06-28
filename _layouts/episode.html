@@ -1,0 +1,49 @@
+---
+layout: base
+---
+
+<div class="album py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 bg-light">
+                <div class="card-body">
+                    <small class="card-text text-muted">{{ site.podcast.episode_label }} {{ page.slug }}</small>
+                    <h4>{{ page.title }}</h4>
+                    <p class="card-text"><em>{{ page.summary }}</em></p>
+                    <p class="card-text">
+                        <small class="text-muted">Duration {{ page.duration }} - Published
+                            {{ page.date | date: "%d/%m/%Y" }}</small></p>
+                    <p class="card-text">{{ page.description }}</p>
+                    <h5>Listen Now</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <audio controls
+                            src="https://dts.podtrac.com/redirect.mp3/{{ site.podcast.domain }}/{{ site.subdir }}{{ site.podcast.episodes }}/ep{{ page.slug }}.mp3"></audio>
+                        <a class="btn btn-sm btn-outline-secondary"
+                            href="https://dts.podtrac.com/redirect.mp3/{{ site.podcast.domain }}/{{ site.subdir }}{{ site.podcast.episodes }}/ep{{ page.slug }}.mp3">Download
+                            MP3</a>
+                    </div>
+                    {% if page.book %}
+                    <h5 style="margin-top: 20px;">Get this book</h5>
+                    <p class="card-text"><a href="{{ page.book.link }}">{{ page.book.title }} by {{ page.book.author }}
+                            on Amazon</a></p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    {% if page.has_image %}
+                    <div class="pageimg"
+                        style="background-image: url('/{{ site.subdir }}{{ site.podcast.episodes }}/ep{{ page.slug }}.png')">
+                    </div>
+                    {% endif %}
+                    <h4>More episodes</h4>
+                    <p class="card-text"><a href="/{{ site.subdir }}">Full listing</a></p>
+                    <h4>Subscribe</h4>
+                    <p class="card-text">
+                        {% include podlinks.html %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

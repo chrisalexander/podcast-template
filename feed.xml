@@ -1,0 +1,62 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" 
+    xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+    xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" 
+    xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0" 
+    xmlns:media="http://www.rssboard.org/media-rss" version="2.0">
+    <channel>
+        <title>{{ site.podcast.name | xml_escape }}</title>
+        <link>{{ site.url }}/{{ site.subdir | xml_escape }}</link>
+        <language>en-us</language>
+        <atom:link href="{{ site.url }}/{{ site.subdir | xml_escape }}feed.xml" rel="self" type="application/rss+xml" />
+        <copyright>{{ site.podcast.author | xml_escape }}</copyright>
+        <itunes:subtitle>{{ site.podcast.subtitle | xml_escape }}</itunes:subtitle>
+        <itunes:author>{{ site.podcast.author | xml_escape }}</itunes:author>
+        <itunes:summary>{{ site.podcast.description | xml_escape }}</itunes:summary>
+        <itunes:keywords>{{ site.podcast.tags | xml_escape }}</itunes:keywords>
+        <itunes:type>episodic</itunes:type>
+        <description>{{ site.podcast.description | xml_escape }}</description>
+        <itunes:block>yes</itunes:block>
+        <itunes:explicit>no</itunes:explicit>
+        <itunes:owner>
+            <itunes:name>{{ site.podcast.author | xml_escape }}</itunes:name>
+            <itunes:email>{{ site.podcast.email | xml_escape }}</itunes:email>
+        </itunes:owner>
+        <itunes:image href="{{ site.url }}/{{ site.subdir | xml_escape }}{{ site.podcast.logo | xml_escape }}" />
+        <itunes:category text="{{ site.podcast.category1 | xml_escape }}">
+            <itunes:category text="{{ site.podcast.subcategory1 | xml_escape }}"/>
+        </itunes:category>
+        <itunes:category text="{{ site.podcast.category2 | xml_escape }}">
+            <itunes:category text="{{ site.podcast.subcategory2 | xml_escape }}"/>
+        </itunes:category>
+        <itunes:category text="{{ site.podcast.category3 | xml_escape }}">
+            <itunes:category text="{{ site.podcast.subcategory3 | xml_escape }}"/>
+        </itunes:category>
+	{% for post in site.posts limit:300 %}
+        <item>
+            <title>{{ site.podcast.episode_label | xml_escape }} {{ post.slug | xml_escape }}: {{ post.title | xml_escape }}</title>
+            <itunes:title>{{ post.title | xml_escape }}</itunes:title>
+            <itunes:author>{{ post.author | xml_escape }}</itunes:author>
+            <itunes:subtitle>{{ post.summary | xml_escape }}</itunes:subtitle>
+            <itunes:summary><![CDATA[{{ post.description | cdata_escape }}]]></itunes:summary>
+            <description><![CDATA[{{ post.description | cdata_escape }}]]></description>
+            <content:encoded><![CDATA[{{ post.description | cdata_escape }}{% if post.book %}<br /><br /><a href="{{ post.book.link }}">{{ post.book.title }} by {{ post.book.author }} on Amazon</a>{% endif %}<br /><br /><a href="{{ site.url }}/{{ site.subdir | xml_escape }}{{ site.podcast.episodes | xml_escape }}/{{ post.slug }}/">{{ site.podcast.episode_label }} notes</a>]]></content:encoded>
+
+            <itunes:image href="{{ site.url }}/{{ site.subdir }}{% if post.has_image %}episodes/ep{{ post.slug }}.png{% else %}{{ site.podcast.logo }}{% endif %}" />
+            <enclosure url="https://dts.podtrac.com/redirect.mp3/{{ site.podcast.domain }}/{{ site.subdir }}{{ site.podcast.episodes }}/ep{{ post.slug }}.mp3" length="{{ post.length }}" type="audio/mpeg" />
+            <itunes:duration>{{ post.duration }}</itunes:duration>
+            <itunes:season>1</itunes:season>
+            <itunes:episode>{{ post.slug | xml_escape }}</itunes:episode>
+            <itunes:episodeType>full</itunes:episodeType>
+
+            <guid isPermaLink="false">{{ site.url }}/{{ site.subdir | xml_escape }}{{ site.podcast.episodes | xml_escape }}/ep{{ post.slug }}.mp3</guid>
+            <pubDate>{{ post.date | date: "%a, %d %b %Y %T %z" }}</pubDate>
+            <itunes:explicit>{% if post.explicit %}yes{% else %}no{% endif %}</itunes:explicit>
+            <link>{{ site.url }}/{{ site.subdir | xml_escape }}{{ site.podcast.episodes | xml_escape }}/{{ post.slug }}/</link>
+        </item>
+	{% endfor %}
+    </channel>
+</rss>

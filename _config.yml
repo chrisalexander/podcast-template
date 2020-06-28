@@ -1,0 +1,24 @@
+permalink: /episodes/:slug/
+exclude: [Gemfile, README.md]
+paginate: 100
+paginate_path: "/page/:num/"
+plugins: [jekyll-paginate]
+podcast:
+  name: Podcast Name
+  author: Podcast Author
+  subtitle: Single sentence
+  description: Multiple sentences
+  tags: multiple, tags
+  email: your-email-here@gmail.com
+  logo: logo.png
+  episodes: episodes
+  episode_label: Episode
+  category1: Category 1
+  subcategory1: Subcategory 1
+  category2: Category 2
+  subcategory2: Subcategory 2
+  category3: Category 3
+  subcategory3: Subcategory 3
+  ga: UA-000000-00
+  domain: domain-here.github.io
+subdir: repo-name-here/
