@@ -21,4 +21,7 @@ podcast:
   subcategory3: Subcategory 3
   ga: UA-000000-00
   domain: domain-here.github.io
+  spotify: spotifycode
+  google: longgooglecode
+  apple: https://podcasts.apple.com/podcast/link
 subdir: repo-name-here/
